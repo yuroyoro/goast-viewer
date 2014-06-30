@@ -1,7 +1,7 @@
 GoAst Viewer
 ================================================================
 
-Golang AST-Tree visualizer.
+Golang AST visualizer.
 
 ## Demo
 
