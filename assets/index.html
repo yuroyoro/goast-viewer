@@ -1,0 +1,77 @@
+<html ng-app="goast">
+  <head>
+    <meta name="viewport" content="width=device-width,  initial-scale=1">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://purecss.io/combo/1.16.1?/css/main-grid.css&/css/main.css&/css/home.css&/css/rainbow/baby-blue.css">
+    <link rel="stylesheet" href="angular-ui-tree.min.css">
+    <link rel="stylesheet" href="goast.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+    <script src="angular-ui-tree.min.js"></script>
+    <script src="goast.js"></script>
+
+  </head>
+  <body>
+    <div id="main">
+      <div class="hero">
+        <div class="hero-titles">
+          <h1 class="hero-site" style="font-size:400%">GoAst Viewer</h1>
+          <h2 class="hefo-tagline">Golang AST-Tree visualizer.</h2>
+        </div>
+        <div class="hero-cta">
+            <div class="is-code-full">
+              <pre class="code code-wrap" data-language="html">
+              <code class="rainbow">
+              <a href="https://twitter.com/yuroyoro" target="_blank">@yuroyoro</a> | <a href="https://github.com/yuroyoro/goast-viewer" target="_blank"> https://github.com/yuroyoro/goast-viewer </a>
+              </code></pre>
+            </div>
+        </div>
+      </div>
+      <div class="pure-g" ng-controller="GoastController">
+        <div class="source pure-u-1-2">
+          <legend>Source</legend>
+          <form class="pure-form pure-form-aligned">
+
+              <div class="pure-control-group">
+                  <input type="file" id="sourcefile" name="sourcefile" placeholder="souce file" ng-model="sourcefile" file-change>
+                  <button type="submit" class="pure-button pure-button-primary" ng-click="parse()">Parse</button>
+              </div>
+              <div class="pure-control-group">
+                  <textarea class="area" id="code" name="code"  ng-model="source"></textarea>
+              </div>
+          </form>
+        </div>
+        <div class="ast pure-u-1-2">
+          <legend>AST Tree</legend>
+
+          <button class="pure-button button-success btn-collapse-all" ng-click="collapseAll()">Collapse all</button>
+          <button class="pure-button button-secondary btn-expand-all" ng-click="expandAll()">Expand all</button>
+
+          <!-- Nested node template -->
+          <script type="text/ng-template" id="nodes_renderer.html">
+            <div class="tree-node tree-node-content" data-nodrag ng-click="toggle(this)">
+              <a class="btn pure-button pure-button--success" data-nodrag ><span class="glyphicon" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}">
+                {{ collapsedLabel(this) }}
+              </span></a>
+              {{node.label}}
+            </div>
+            <ol ui-tree-nodes="" ng-model="node.children" ng-class="{hidden: collapsed}">
+              <li ng-repeat="node in node.children" ui-tree-node ng-include="'nodes_renderer.html'" collapsed="true" ng-mouseover="focus(this);$event.stopPropagation()">
+              </li>
+            </ol>
+          </script>
+          <div ui-tree id="tree-root">
+            <ol ui-tree-nodes="" ng-model="asts">
+              <li ng-repeat="node in asts" ui-tree-node ng-include="'nodes_renderer.html'" ng-mouseover="focus(this); $event.stopPropagation()"></li>
+            </ol>
+          </div>
+
+          <legend>Dump</legend>
+          <pre class="dump">{{ dump }} </pre>
+
+        </div>
+      </div>
+   </div>
+  </body>
+</html>
