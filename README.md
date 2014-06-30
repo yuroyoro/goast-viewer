@@ -7,7 +7,7 @@ Golang AST-Tree visualizer.
 
 [GoAst Viewer Demo](http://goast.yuroyoro.net/)
 
-
+![](https://raw.githubusercontent.com/yuroyoro/goast-viewer/master/goast-viewer.png)
 
 
 ## Usage
