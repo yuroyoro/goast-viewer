@@ -97,7 +97,7 @@ func main() {\n\
         if (scope.collapsed) {
           return "+";
         } else {
-          return "-";
+          return "−";
         }
       } else {
         return " ";
