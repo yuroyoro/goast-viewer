@@ -30,7 +30,9 @@ func Parse(filename string, source string) (a *Ast, dump string, err error) {
 
 	// Print the AST.
 	var bf bytes.Buffer
-	ast.Fprint(&bf, fset, f, ast.NotNilFilter)
+	ast.Fprint(&bf, fset, f, func(string, reflect.Value) bool {
+		return true
+	})
 
 	a, err = BuildAst("", f)
 	if err != nil {
