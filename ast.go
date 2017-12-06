@@ -26,7 +26,7 @@ func Parse(filename string, source string) (a *Ast, dump string, err error) {
 
 	// Create the AST by parsing src.
 	fset := token.NewFileSet() // positions are relative to fset
-	f, err := parser.ParseFile(fset, filename, source, 0)
+	f, err := parser.ParseFile(fset, filename, source, parser.ParseComments)
 
 	// Print the AST.
 	var bf bytes.Buffer
