@@ -1,3 +1,3 @@
-module github.com/paulvollmer/goast-viewer
+module github.com/yuroyoro/goast-viewer
 
 go 1.12

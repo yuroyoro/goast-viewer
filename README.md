@@ -5,7 +5,7 @@ Golang AST visualizer.
 
 ## Demo
 
-[GoAst Viewer Demo](https://paulvollmer.net/goast-viewer/index.html)
+[GoAst Viewer Demo](https://yuroyoro.github.io/goast-viewer/index.html)
 
 ![](https://raw.githubusercontent.com/yuroyoro/goast-viewer/master/goast-viewer.png)
 
