@@ -5,19 +5,15 @@ Golang AST visualizer.
 
 ## Demo
 
-[GoAst Viewer Demo](http://goast.yuroyoro.net/)
+[GoAst Viewer Demo](https://yuroyoro.github.io/goast-viewer/index.html)
 
 ![](https://raw.githubusercontent.com/yuroyoro/goast-viewer/master/goast-viewer.png)
 
 
 ## Usage
 
-You just run `goas-viewer` and go `http://localhost:7650/`
+You just need to run a http server and open your browser to `index.html`
 
-```bash
-$ goast-viewer
-2014/06/30 18:57:10 Server listening on : :7650
-```
 
 ## Installation
 
@@ -26,9 +22,10 @@ To install, use `go get` and `make install`.
 ```bash
 $ go get -d github.com/yuroyoro/goast-viewer
 $ cd $GOPATH/src/github.com/yuroyoro/goast-viewer
-$ make install
+$ make build
 ```
 
-## Author
+## Authors
 
-[yuroyoro](https://github.com/yuroyoro)
+- [yuroyoro](https://github.com/yuroyoro)
+- [paulvollmer](https://github.com/paulvollmer)

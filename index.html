@@ -1,15 +1,37 @@
 <html ng-app="goast">
   <head>
     <meta name="viewport" content="width=device-width,  initial-scale=1">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-    <link rel="stylesheet" href="http://purecss.io/combo/1.16.1?/css/main-grid.css&/css/main.css&/css/home.css&/css/rainbow/baby-blue.css">
+    <link rel="stylesheet" href="https://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="https://purecss.io/combo/1.16.1?/css/main-grid.css&/css/main.css&/css/home.css&/css/rainbow/baby-blue.css">
     <link rel="stylesheet" href="angular-ui-tree.min.css">
     <link rel="stylesheet" href="goast.css">
-    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
     <script src="angular-ui-tree.min.js"></script>
     <script src="goast.js"></script>
+    <script src="wasm_exec.js"></script>
+    <script>
+      if (!WebAssembly.instantiateStreaming) {
+        // polyfill
+        WebAssembly.instantiateStreaming = async (resp, importObject) => {
+          const source = await (await resp).arrayBuffer();
+          return await WebAssembly.instantiate(source, importObject);
+        };
+      }
+      const go = new Go();
+      let mod, inst;
+      WebAssembly.instantiateStreaming(fetch("lib.wasm"), go.importObject).then(
+        result => {
+          mod = result.module;
+          inst = result.instance;
+        }
+      );
+      async function run() {
+        await go.run(inst);
+        inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
+      }
+    </script>
 
   </head>
   <body>

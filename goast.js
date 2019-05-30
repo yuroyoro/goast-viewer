@@ -105,23 +105,12 @@ func main() {\n\
     }
 
     $scope.parse = function() {
-      var data = new FormData(),
-          xhr = new XMLHttpRequest();
-
-      // Send to server
-      data.append('source', $scope.source)
-      // xhr.open('POST', '/parse.json');
-      // xhr.send(data);
-      $http.post('parse.json',data,
-      {
-          headers:{"Content-type":undefined}
-          ,transformRequest: null
-      }).success(function(data, status, headers, config) {
-        $scope.asts   = [data.ast];
-        $scope.source = data.source;
-        $scope.dump   = data.dump;
-      });
-
+      window.global.source = $scope.source
+      run()
+      let data = JSON.parse(output);
+      $scope.asts   = [data.ast];
+      $scope.source = data.source;
+      $scope.dump   = data.dump;
     }
 
     $scope.toggle = function(scope) {
@@ -159,4 +148,3 @@ func main() {\n\
     };
 
 }]);
-
