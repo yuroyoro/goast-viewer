@@ -105,7 +105,7 @@ func main() {\n\
     }
 
     $scope.parse = function() {
-      window.global.source = $scope.source
+      window.source = $scope.source
       run()
       let data = JSON.parse(output);
       $scope.asts   = [data.ast];

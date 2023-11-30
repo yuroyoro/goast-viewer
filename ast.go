@@ -41,7 +41,7 @@ func Parse(filename string, source string) (a *Ast, dump string, err error) {
 	return a, string(bf.Bytes()), nil
 }
 
-func BuildAst(prefix string, n interface{}) (astobj *Ast, err error) {
+func BuildAst(prefix string, n any) (astobj *Ast, err error) {
 	v := reflect.ValueOf(n)
 	t := v.Type()
 
@@ -128,7 +128,7 @@ func BuildAst(prefix string, n interface{}) (astobj *Ast, err error) {
 	return &a, nil
 }
 
-func Label(prefix string, n interface{}) string {
+func Label(prefix string, n any) string {
 
 	var bf bytes.Buffer
 
